@@ -7,7 +7,7 @@ includes the following:
 * A basic bot configuration that enables slash commands and shows you how to conditionally provide a different
   message command prefix for different guilds
 * A Gradle Kotlin build script that makes use of the Kotlin Discord public maven repo, the new JVM IR compiler, Detekt 
-  for linting(with a fairly strict configuration), and a Git commit hook plugin that runs Detekt when you make a commit
+  for linting (with a fairly strict configuration), and a Git commit hook plugin that runs Detekt when you make a commit
 * GitHub CI scripts that build the bot and publish its artefacts
 * A reasonable `.gitignore` file, including one in the `.idea` folder that ignores files that shouldn't be committed -
   if you're using IDEA yourself, you should install the Ignore plugin to handle changes to this for you
@@ -35,7 +35,7 @@ includes the following:
 * `App.kt` includes a basic bot which uses a hardcoded guild ID and gets the bot's token from the `TOKEN` environment
   variable. Update the guild ID to match your test server's ID. This file also includes some example code that shows one
   potential way of providing different command prefixes for different servers.
-* `TestExtension.kd` includes a simple example extension that creates a `slap` command. This command works as both a
+* `TestExtension.kt` includes a simple example extension that creates a `slap` command. This command works as both a
   message command and slash command, and allows you to slap other users with whatever you wish, defaulting to a
   `large, smelly trout`.
 
