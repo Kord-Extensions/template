@@ -3,11 +3,11 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     application
 
-    kotlin("jvm") version "1.4.31"
+    kotlin("jvm")
 
-    id("com.github.jakemarsden.git-hooks") version "0.0.1"
-    id("com.github.johnrengelman.shadow") version "5.2.0"
-    id("io.gitlab.arturbosch.detekt") version "1.15.0"
+    id("com.github.jakemarsden.git-hooks")
+    id("com.github.johnrengelman.shadow")
+    id("io.gitlab.arturbosch.detekt")
 }
 
 group = "template"
@@ -24,16 +24,15 @@ repositories {
 }
 
 dependencies {
-    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.15.0")
+    detektPlugins(libs.detekt)
 
-    implementation("com.kotlindiscord.kord.extensions:kord-extensions:1.4.0-RC7")
+    implementation(libs.kord.extensions)
+    implementation(libs.kotlin.stdlib)
 
-    implementation("ch.qos.logback:logback-classic:1.2.3")
-    implementation("io.github.microutils:kotlin-logging:2.0.3")
-    implementation("org.codehaus.groovy:groovy:3.0.4")
-
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
+    // Logging dependencies
+    implementation(libs.groovy)
+    implementation(libs.logback)
+    implementation(libs.logging)
 }
 
 application {
@@ -47,13 +46,11 @@ gitHooks {
     )
 }
 
-// If you don't want the import, remove it and use org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 tasks.withType<KotlinCompile> {
     // Current LTS version of Java
     kotlinOptions.jvmTarget = "11"
 
     kotlinOptions.freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
-    kotlinOptions.useIR = true
 }
 
 tasks.jar {

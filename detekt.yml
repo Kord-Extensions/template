@@ -1,6 +1,8 @@
+# TODO: Update `rootPackage` in naming -> InvalidPackageDeclaration
+
 build:
   maxIssues: 0
-  excludeCorrectable: true
+  excludeCorrectable: false
   weights:
   # complexity: 2
   # LongParameterList: 1
@@ -233,7 +235,7 @@ formatting:
     active: true
     autoCorrect: true
   ArgumentListWrapping:
-    active: true
+    active: false  # It's wrong!
     autoCorrect: true
   ChainWrapping:
     active: true
@@ -253,7 +255,7 @@ formatting:
   ImportOrdering:
     active: true
     autoCorrect: true
-    layout: idea
+    layout: "*,java.**,javax.**,kotlin.**,^"
   Indentation:
     active: false
     autoCorrect: false
@@ -388,9 +390,12 @@ naming:
     parameterPattern: '[a-z][A-Za-z0-9]*'
     excludeClassPattern: '$^'
     ignoreOverridden: true
-  InvalidPackageDeclaration:  # If you want to use this, set the root package and enable it
-    active: false
+
+  InvalidPackageDeclaration:
+    active: true
+    # TODO: Update this with your project's base package
     rootPackage: 'template'
+
   MatchingDeclarationName:
     active: true
     mustBeFirst: true

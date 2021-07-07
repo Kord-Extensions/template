@@ -1,18 +1,16 @@
 package template.extensions
 
-import com.kotlindiscord.kord.extensions.ExtensibleBot
-import com.kotlindiscord.kord.extensions.commands.converters.defaultingCoalescedString
-import com.kotlindiscord.kord.extensions.commands.converters.defaultingString
-import com.kotlindiscord.kord.extensions.commands.converters.user
+import com.kotlindiscord.kord.extensions.commands.converters.impl.defaultingCoalescingString
+import com.kotlindiscord.kord.extensions.commands.converters.impl.defaultingString
+import com.kotlindiscord.kord.extensions.commands.converters.impl.user
 import com.kotlindiscord.kord.extensions.commands.parser.Arguments
 import com.kotlindiscord.kord.extensions.extensions.Extension
 import com.kotlindiscord.kord.extensions.utils.respond
-import com.kotlindiscord.kord.extensions.utils.startsWithVowel
 import dev.kord.common.annotation.KordPreview
 import template.TEST_SERVER_ID
 
 @OptIn(KordPreview::class)
-class TestExtension(bot: ExtensibleBot) : Extension(bot) {
+class TestExtension : Extension() {
     override val name = "test"
 
     override suspend fun setup() {
@@ -23,50 +21,39 @@ class TestExtension(bot: ExtensibleBot) : Extension(bot) {
             check { event -> event.message.author != null }
 
             action {
-                with(arguments) {
-                    // Don't slap ourselves on request, slap the requester!
-                    val realTarget = if (target.id == bot.kord.selfId) {
-                        message.author!!
-                    } else {
-                        target
-                    }
+                // Because of the DslMarker annotation KordEx uses, we need to grab Kord explicitly
+                val kord = this@TestExtension.kord
 
-                    // Use "a" or "an" as appropriate for English
-                    val indefiniteArticle = if (weapon!!.startsWithVowel()) {
-                        "an"
-                    } else {
-                        "a"
-                    }
-
-                    message.respond("*slaps ${realTarget.mention} with $indefiniteArticle $weapon*")
+                // Don't slap ourselves on request, slap the requester!
+                val realTarget = if (arguments.target.id == kord.selfId) {
+                    message.author!!
+                } else {
+                    arguments.target
                 }
+
+                message.respond("*slaps ${realTarget.mention} with their ${arguments.weapon}*")
             }
         }
 
         slashCommand(::SlapSlashArgs) {
             name = "slap"
             description = "Ask the bot to slap another user"
-            showSource = true
 
             guild(TEST_SERVER_ID)  // Otherwise it'll take an hour to update
 
             action {
-                with(arguments) {
-                    // Don't slap ourselves on request, slap the requester!
-                    val realTarget = if (target.id == bot.kord.selfId) {
-                        member
-                    } else {
-                        target
-                    }
+                // Because of the DslMarker annotation KordEx uses, we need to grab Kord explicitly
+                val kord = this@TestExtension.kord
 
-                    // Use "a" or "an" as appropriate for English
-                    val indefiniteArticle = if (weapon.startsWithVowel()) {
-                        "an"
-                    } else {
-                        "a"
-                    }
+                // Don't slap ourselves on request, slap the requester!
+                val realTarget = if (arguments.target.id == kord.selfId) {
+                    member
+                } else {
+                    arguments.target
+                }
 
-                    followUp("*slaps ${realTarget.mention} with $indefiniteArticle $weapon*")
+                publicFollowUp {
+                    content = "*slaps ${realTarget?.mention} with their ${arguments.weapon}*"
                 }
             }
         }
@@ -76,7 +63,7 @@ class TestExtension(bot: ExtensibleBot) : Extension(bot) {
         val target by user("target", description = "Person you want to slap")
 
         // This is nullable due to a typo - it won't be in future releases!
-        val weapon by defaultingCoalescedString(
+        val weapon by defaultingCoalescingString(
             "weapon",
 
             defaultValue = "large, smelly trout",

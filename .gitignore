@@ -107,3 +107,6 @@ fabric.properties
 
 # Gradle build output folder
 build/
+
+# Env vars - don't commit this!
+.env

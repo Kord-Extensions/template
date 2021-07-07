@@ -4,27 +4,36 @@
 package template
 
 import com.kotlindiscord.kord.extensions.ExtensibleBot
+import com.kotlindiscord.kord.extensions.utils.env
+import dev.kord.common.entity.Snowflake
 import template.extensions.TestExtension
 
-@Suppress("UnderscoresInNumericLiterals")  // It's an ID
-const val TEST_SERVER_ID = 787452339908116521  // Change this to your test server's ID
+val TEST_SERVER_ID = Snowflake(
+    env("TEST_SERVER")?.toLong()  // Get the test server ID from the env vars or a .env file
+        ?: error("Env var TEST_SERVER not provided")
+)
 
-private val TOKEN = System.getenv("TOKEN")
+private val TOKEN = env("TOKEN")   // Get the bot' token from the env vars or a .env file
+    ?: error("Env var TOKEN not provided")
 
 suspend fun main() {
     val bot = ExtensibleBot(TOKEN) {
-        commands {
+        messageCommands {
             defaultPrefix = "?"
-            slashCommands = true
 
             prefix { default ->
-                if (guildId?.value == TEST_SERVER_ID) {
-                    // For this server, we use ! as the command prefix
+                if (guildId == TEST_SERVER_ID) {
+                    // For the test server, we use ! as the command prefix
                     "!"
                 } else {
+                    // For other servers, we use the configured default prefix
                     default
                 }
             }
+        }
+
+        slashCommands {
+            enabled = true
         }
 
         extensions {

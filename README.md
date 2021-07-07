@@ -6,13 +6,14 @@ includes the following:
 * A basic extension that allows you to slap other people, using both message commands and slash commands
 * A basic bot configuration that enables slash commands and shows you how to conditionally provide a different
   message command prefix for different guilds
-* A Gradle Kotlin build script that makes use of the Kotlin Discord public maven repo, the new JVM IR compiler, Detekt 
-  for linting (with a fairly strict configuration), and a Git commit hook plugin that runs Detekt when you make a commit
+* A Gradle Kotlin build script that makes use of the Kotlin Discord public maven repo, Detekt for linting (with a 
+  fairly strict configuration), and a Git commit hook plugin that runs Detekt when you make a commit - this also makes
+  use of Gradle 7's new version catalog feature, for easy configuration of dependencies
 * GitHub CI scripts that build the bot and publish its artefacts
 * A reasonable `.gitignore` file, including one in the `.idea` folder that ignores files that shouldn't be committed -
   if you're using IDEA yourself, you should install the Ignore plugin to handle changes to this for you
-* A Groovy-based Logback config, so you have reasonable logging out of the gate
-* A Gradle wrapper
+* A Groovy-based Logback config, so you have reasonable logging out of the box
+* A Gradle wrapper using Gradle 7.1.1
 
 ## Potential Changes
 
@@ -26,18 +27,26 @@ includes the following:
     * In the `application` and `tasks.jar` blocks, update the main class path/name as appropriate
     * To target a newer/older Java version, change the options in the `KotlinCompile` configuration and `java` blocks
 * In the `settings.gradle.kts`, update the name of the root project as appropriate.
-* The bundled Detekt config is pretty strict. You can check over `detekt.yml` if you want to change it.
+* The bundled Detekt config is pretty strict. You can check over `detekt.yml` if you want to change it, but you need to 
+  follow the TODOs in that file regardless.
 * The Logback configuration is in `src/main/resources/logback.groovy`. If the logging setup doesn't suit, you can change
   it there.
 
 ## Bundled Bot
 
-* `App.kt` includes a basic bot which uses a hardcoded guild ID and gets the bot's token from the `TOKEN` environment
-  variable. Update the guild ID to match your test server's ID. This file also includes some example code that shows one
-  potential way of providing different command prefixes for different servers.
+* `App.kt` includes a basic bot which uses environment variables (or variables in a `.env` file) for the testing guild
+  ID (`TEST_SERVER`) and the bot's token (`TOKEN`). You can specify these either directly as environment variables, or
+  as `KEY=value` pairs in a file named `.env`. This file also includes some example code that shows one potential way 
+  of providing different command prefixes for different servers.
 * `TestExtension.kt` includes a simple example extension that creates a `slap` command. This command works as both a
   message command and slash command, and allows you to slap other users with whatever you wish, defaulting to a
   `large, smelly trout`.
 
-To test the bot, simply update the `TEST_SERVER_ID` variable in `App.kt` to your testing server's ID, and run the bot
-with the `TOKEN` environment variable set to a Discord bot token.
+To test the bot, we recommend using a `.env` file that looks like the following:
+
+```dotenv
+TOKEN=abc...
+TEST_SERVER=123...
+```
+
+Create this file, fill it out, and run the `run` gradle task for testing in development.
