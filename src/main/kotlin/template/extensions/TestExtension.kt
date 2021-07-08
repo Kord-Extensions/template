@@ -4,6 +4,7 @@ import com.kotlindiscord.kord.extensions.commands.converters.impl.defaultingCoal
 import com.kotlindiscord.kord.extensions.commands.converters.impl.defaultingString
 import com.kotlindiscord.kord.extensions.commands.converters.impl.user
 import com.kotlindiscord.kord.extensions.commands.parser.Arguments
+import com.kotlindiscord.kord.extensions.commands.slash.AutoAckType
 import com.kotlindiscord.kord.extensions.extensions.Extension
 import com.kotlindiscord.kord.extensions.utils.respond
 import dev.kord.common.annotation.KordPreview
@@ -38,6 +39,9 @@ class TestExtension : Extension() {
         slashCommand(::SlapSlashArgs) {
             name = "slap"
             description = "Ask the bot to slap another user"
+
+            // We want to send a public follow-up - KordEx will handle the rest
+            autoAck = AutoAckType.PUBLIC
 
             guild(TEST_SERVER_ID)  // Otherwise it'll take an hour to update
 
