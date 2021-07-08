@@ -63,10 +63,9 @@ class TestExtension : Extension() {
         }
     }
 
-    class SlapArgs : Arguments() {
+    inner class SlapArgs : Arguments() {
         val target by user("target", description = "Person you want to slap")
 
-        // This is nullable due to a typo - it won't be in future releases!
         val weapon by defaultingCoalescingString(
             "weapon",
 
@@ -75,7 +74,7 @@ class TestExtension : Extension() {
         )
     }
 
-    class SlapSlashArgs : Arguments() {
+    inner class SlapSlashArgs : Arguments() {
         val target by user("target", description = "Person you want to slap")
 
         // Coalesced strings are not currently supported by slash commands
