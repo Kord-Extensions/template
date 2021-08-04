@@ -19,7 +19,7 @@ class TestExtension : Extension() {
             name = "slap"
             description = "Ask the bot to slap another user"
 
-            check { event -> event.message.author != null }
+            check { failIf(event.message.author == null) }
 
             action {
                 // Because of the DslMarker annotation KordEx uses, we need to grab Kord explicitly
