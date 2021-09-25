@@ -4,6 +4,7 @@ kotlin = "1.5.30"  # Note: Plugin versions must be updated in the settings.gradl
 
 groovy = "3.0.8"
 kord-extensions = "1.5.0-SNAPSHOT"
+kx-ser = "1.2.2"
 logging = "2.0.10"
 logback = "1.2.5"
 
@@ -14,3 +15,4 @@ kord-extensions = { module = "com.kotlindiscord.kord.extensions:kord-extensions"
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8" }
 logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 logging = { module = "io.github.microutils:kotlin-logging", version.ref = "logging" }
+kx-ser = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kx-ser" }

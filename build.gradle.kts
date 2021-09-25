@@ -4,6 +4,7 @@ plugins {
     application
 
     kotlin("jvm")
+    kotlin("plugin.serialization")
 
     id("com.github.jakemarsden.git-hooks")
     id("com.github.johnrengelman.shadow")
@@ -28,6 +29,7 @@ dependencies {
 
     implementation(libs.kord.extensions)
     implementation(libs.kotlin.stdlib)
+    implementation(libs.kx.ser)
 
     // Logging dependencies
     implementation(libs.groovy)
