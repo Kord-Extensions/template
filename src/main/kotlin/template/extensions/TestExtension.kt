@@ -1,11 +1,13 @@
 package template.extensions
 
+import com.kotlindiscord.kord.extensions.commands.Arguments
 import com.kotlindiscord.kord.extensions.commands.converters.impl.defaultingCoalescingString
 import com.kotlindiscord.kord.extensions.commands.converters.impl.defaultingString
 import com.kotlindiscord.kord.extensions.commands.converters.impl.user
-import com.kotlindiscord.kord.extensions.commands.parser.Arguments
-import com.kotlindiscord.kord.extensions.commands.slash.AutoAckType
 import com.kotlindiscord.kord.extensions.extensions.Extension
+import com.kotlindiscord.kord.extensions.extensions.chatCommand
+import com.kotlindiscord.kord.extensions.extensions.publicSlashCommand
+import com.kotlindiscord.kord.extensions.interactions.respond
 import com.kotlindiscord.kord.extensions.utils.respond
 import dev.kord.common.annotation.KordPreview
 import template.TEST_SERVER_ID
@@ -15,7 +17,7 @@ class TestExtension : Extension() {
     override val name = "test"
 
     override suspend fun setup() {
-        command(::SlapArgs) {
+        chatCommand(::SlapArgs) {
             name = "slap"
             description = "Ask the bot to slap another user"
 
@@ -36,12 +38,9 @@ class TestExtension : Extension() {
             }
         }
 
-        slashCommand(::SlapSlashArgs) {
+        publicSlashCommand(::SlapSlashArgs) {
             name = "slap"
             description = "Ask the bot to slap another user"
-
-            // We want to send a public follow-up - KordEx will handle the rest
-            autoAck = AutoAckType.PUBLIC
 
             guild(TEST_SERVER_ID)  // Otherwise it'll take an hour to update
 
@@ -56,7 +55,7 @@ class TestExtension : Extension() {
                     arguments.target
                 }
 
-                publicFollowUp {
+                respond {
                     content = "*slaps ${realTarget?.mention} with their ${arguments.weapon}*"
                 }
             }
