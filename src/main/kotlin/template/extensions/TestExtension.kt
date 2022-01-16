@@ -1,7 +1,7 @@
 package template.extensions
 
 import com.kotlindiscord.kord.extensions.commands.Arguments
-import com.kotlindiscord.kord.extensions.commands.converters.impl.defaultingCoalescingString
+import com.kotlindiscord.kord.extensions.commands.converters.impl.coalescingDefaultingString
 import com.kotlindiscord.kord.extensions.commands.converters.impl.defaultingString
 import com.kotlindiscord.kord.extensions.commands.converters.impl.user
 import com.kotlindiscord.kord.extensions.extensions.Extension
@@ -63,25 +63,31 @@ class TestExtension : Extension() {
     }
 
     inner class SlapArgs : Arguments() {
-        val target by user("target", description = "Person you want to slap")
+        val target by user {
+            name = "target"
+            description = "Person you want to slap"
+        }
 
-        val weapon by defaultingCoalescingString(
-            "weapon",
+        val weapon by coalescingDefaultingString {
+            name = "weapon"
 
-            defaultValue = "large, smelly trout",
+            defaultValue = "large, smelly trout"
             description = "What you want to slap with"
-        )
+        }
     }
 
     inner class SlapSlashArgs : Arguments() {
-        val target by user("target", description = "Person you want to slap")
+        val target by user {
+            name = "target"
+            description = "Person you want to slap"
+        }
 
         // Coalesced strings are not currently supported by slash commands
-        val weapon by defaultingString(
-            "weapon",
+        val weapon by defaultingString {
+            name = "weapon"
 
-            defaultValue = "large, smelly trout",
+            defaultValue = "large, smelly trout"
             description = "What you want to slap with"
-        )
+        }
     }
 }
