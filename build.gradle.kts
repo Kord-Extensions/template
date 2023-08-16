@@ -6,7 +6,6 @@ plugins {
     kotlin("jvm")
     kotlin("plugin.serialization")
 
-    id("com.github.jakemarsden.git-hooks")
     id("com.github.johnrengelman.shadow")
     id("io.gitlab.arturbosch.detekt")
 }
@@ -40,18 +39,12 @@ dependencies {
     implementation(libs.groovy)
     implementation(libs.jansi)
     implementation(libs.logback)
+    implementation(libs.logback.groovy)
     implementation(libs.logging)
 }
 
 application {
-    // This is deprecated, but the Shadow plugin requires it
-    mainClassName = "template.AppKt"
-}
-
-gitHooks {
-    setHooks(
-        mapOf("pre-commit" to "detekt")
-    )
+    mainClass.set("template.AppKt")
 }
 
 tasks.withType<KotlinCompile> {
@@ -77,5 +70,6 @@ java {
 
 detekt {
     buildUponDefaultConfig = true
-    config = rootProject.files("detekt.yml")
+
+    config.from(rootProject.files("detekt.yml"))
 }
