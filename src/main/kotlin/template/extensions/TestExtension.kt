@@ -9,85 +9,77 @@ import com.kotlindiscord.kord.extensions.extensions.chatCommand
 import com.kotlindiscord.kord.extensions.extensions.publicSlashCommand
 import com.kotlindiscord.kord.extensions.types.respond
 import com.kotlindiscord.kord.extensions.utils.respond
-import dev.kord.common.annotation.KordPreview
 import template.TEST_SERVER_ID
 
-@OptIn(KordPreview::class)
 class TestExtension : Extension() {
-    override val name = "test"
+	override val name = "test"
 
-    override suspend fun setup() {
-        chatCommand(::SlapArgs) {
-            name = "slap"
-            description = "Ask the bot to slap another user"
+	override suspend fun setup() {
+		chatCommand(::SlapArgs) {
+			name = "slap"
+			description = "Ask the bot to slap another user"
 
-            check { failIf(event.message.author == null) }
+			check { failIf(event.message.author == null) }
 
-            action {
-                // Because of the DslMarker annotation KordEx uses, we need to grab Kord explicitly
-                val kord = this@TestExtension.kord
+			action {
+				// Don't slap ourselves on request, slap the requester!
+				val realTarget = if (arguments.target.id == event.kord.selfId) {
+					message.author!!
+				} else {
+					arguments.target
+				}
 
-                // Don't slap ourselves on request, slap the requester!
-                val realTarget = if (arguments.target.id == kord.selfId) {
-                    message.author!!
-                } else {
-                    arguments.target
-                }
+				message.respond("*slaps ${realTarget.mention} with their ${arguments.weapon}*")
+			}
+		}
 
-                message.respond("*slaps ${realTarget.mention} with their ${arguments.weapon}*")
-            }
-        }
+		publicSlashCommand(::SlapSlashArgs) {
+			name = "slap"
+			description = "Ask the bot to slap another user"
 
-        publicSlashCommand(::SlapSlashArgs) {
-            name = "slap"
-            description = "Ask the bot to slap another user"
+			guild(TEST_SERVER_ID)  // Otherwise it will take up to an hour to update
 
-            guild(TEST_SERVER_ID)  // Otherwise it'll take an hour to update
+			action {
+				// Don't slap ourselves on request, slap the requester!
+				val realTarget = if (arguments.target.id == event.kord.selfId) {
+					member
+				} else {
+					arguments.target
+				}
 
-            action {
-                // Because of the DslMarker annotation KordEx uses, we need to grab Kord explicitly
-                val kord = this@TestExtension.kord
+				respond {
+					content = "*slaps ${realTarget?.mention} with their ${arguments.weapon}*"
+				}
+			}
+		}
+	}
 
-                // Don't slap ourselves on request, slap the requester!
-                val realTarget = if (arguments.target.id == kord.selfId) {
-                    member
-                } else {
-                    arguments.target
-                }
+	inner class SlapArgs : Arguments() {
+		val target by user {
+			name = "target"
+			description = "Person you want to slap"
+		}
 
-                respond {
-                    content = "*slaps ${realTarget?.mention} with their ${arguments.weapon}*"
-                }
-            }
-        }
-    }
+		val weapon by coalescingDefaultingString {
+			name = "weapon"
 
-    inner class SlapArgs : Arguments() {
-        val target by user {
-            name = "target"
-            description = "Person you want to slap"
-        }
+			defaultValue = "large, smelly trout"
+			description = "What you want to slap with"
+		}
+	}
 
-        val weapon by coalescingDefaultingString {
-            name = "weapon"
+	inner class SlapSlashArgs : Arguments() {
+		val target by user {
+			name = "target"
+			description = "Person you want to slap"
+		}
 
-            defaultValue = "large, smelly trout"
-            description = "What you want to slap with"
-        }
-    }
+		// Slash commands don't support coalescing strings
+		val weapon by defaultingString {
+			name = "weapon"
 
-    inner class SlapSlashArgs : Arguments() {
-        val target by user {
-            name = "target"
-            description = "Person you want to slap"
-        }
-
-        // Coalesced strings are not currently supported by slash commands
-        val weapon by defaultingString {
-            name = "weapon"
-
-            defaultValue = "large, smelly trout"
-            description = "What you want to slap with"
-        }
-    }
+			defaultValue = "large, smelly trout"
+			description = "What you want to slap with"
+		}
+	}
 }
