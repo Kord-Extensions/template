@@ -1,12 +1,9 @@
-name: Build (CI)
+name: Build & Publish
 
 on:
   push:
-    branches-ignore:
-      - root
+    branches:
       - develop
-
-  pull_request:
 
 jobs:
   build:
