@@ -1,14 +1,14 @@
 [versions]
-detekt = "1.23.1"  # Note: Plugin versions must be updated in the settings.gradle.kts too
-kotlin = "1.9.0"  # Note: Plugin versions must be updated in the settings.gradle.kts too
+detekt = "1.23.4"  # Note: Plugin versions must be updated in the settings.gradle.kts too
+kotlin = "1.9.22"  # Note: Plugin versions must be updated in the settings.gradle.kts too
 
-groovy = "3.0.14"
-jansi = "2.4.0"
-kord-extensions = "1.5.9-SNAPSHOT"
-kx-ser = "1.5.1"
-logging = "3.0.5"
-logback = "1.4.5"
-logback-groovy = "1.14.4"
+groovy = "3.0.20"
+jansi = "2.4.1"
+kord-extensions = "1.7.1-SNAPSHOT"
+kx-ser = "1.6.2"
+logback = "1.4.14"
+logback-groovy = "1.14.5"
+logging = "6.0.2"
 
 [libraries]
 detekt = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
@@ -19,4 +19,4 @@ kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8" }
 kx-ser = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kx-ser" }
 logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 logback-groovy = { module = "io.github.virtualdogbert:logback-groovy-config", version.ref = "logback-groovy" }
-logging = { module = "io.github.microutils:kotlin-logging", version.ref = "logging" }
+logging = { module = "io.github.oshai:kotlin-logging", version.ref = "logging" }
