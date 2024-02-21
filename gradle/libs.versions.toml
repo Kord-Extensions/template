@@ -4,11 +4,11 @@ kotlin = "1.9.22"  # Note: Plugin versions must be updated in the settings.gradl
 
 groovy = "3.0.20"
 jansi = "2.4.1"
-kord-extensions = "1.7.1-SNAPSHOT"
-kx-ser = "1.6.2"
-logback = "1.4.14"
+kord-extensions = "1.8.0-SNAPSHOT"
+kx-ser = "1.6.3"
+logback = "1.5.0"
 logback-groovy = "1.14.5"
-logging = "6.0.2"
+logging = "6.0.3"
 
 [libraries]
 detekt = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
