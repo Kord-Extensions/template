@@ -6,7 +6,7 @@ groovy = "3.0.20"
 jansi = "2.4.1"
 kord-extensions = "1.8.0-SNAPSHOT"
 kx-ser = "1.6.3"
-logback = "1.5.0"
+logback = "1.5.3"
 logback-groovy = "1.14.5"
 logging = "6.0.3"
 
