@@ -4,6 +4,8 @@ import com.kotlindiscord.kord.extensions.commands.Arguments
 import com.kotlindiscord.kord.extensions.commands.converters.impl.coalescingDefaultingString
 import com.kotlindiscord.kord.extensions.commands.converters.impl.defaultingString
 import com.kotlindiscord.kord.extensions.commands.converters.impl.user
+import com.kotlindiscord.kord.extensions.components.components
+import com.kotlindiscord.kord.extensions.components.publicButton
 import com.kotlindiscord.kord.extensions.extensions.Extension
 import com.kotlindiscord.kord.extensions.extensions.chatCommand
 import com.kotlindiscord.kord.extensions.extensions.publicSlashCommand
@@ -32,6 +34,29 @@ class TestExtension : Extension() {
 			}
 		}
 
+		chatCommand {
+			name = "button"
+			description = "A simple example command that sends a button."
+
+			check { failIf(event.message.author == null) }
+
+			action {
+				message.respond {
+					components {
+						publicButton {
+							label = "Button!"
+
+							action {
+								respond {
+									content = "You pushed the button!"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
 		publicSlashCommand(::SlapSlashArgs) {
 			name = "slap"
 			description = "Ask the bot to slap another user"
@@ -48,6 +73,27 @@ class TestExtension : Extension() {
 
 				respond {
 					content = "*slaps ${realTarget?.mention} with their ${arguments.weapon}*"
+				}
+			}
+		}
+
+		publicSlashCommand {
+			name = "button"
+			description = "A simple example command that sends a button."
+
+			action {
+				respond {
+					components {
+						publicButton {
+							label = "Button!"
+
+							action {
+								respond {
+									content = "You pushed the button!"
+								}
+							}
+						}
+					}
 				}
 			}
 		}
