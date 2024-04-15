@@ -8,7 +8,7 @@ kord-extensions = "1.8.0-SNAPSHOT"
 kx-ser = "1.6.3"
 logback = "1.5.3"
 logback-groovy = "1.14.5"
-logging = "6.0.3"
+logging = "6.0.9"
 
 [libraries]
 detekt = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
