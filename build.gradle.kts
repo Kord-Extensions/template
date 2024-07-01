@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -48,10 +49,11 @@ application {
 }
 
 tasks.withType<KotlinCompile> {
-	// Current LTS version of Java
-	kotlinOptions.jvmTarget = "17"
+	compilerOptions {
+		freeCompilerArgs.add("-Xopt-in=kotlin.RequiresOptIn")
 
-	kotlinOptions.freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
+		jvmTarget.set(JvmTarget.JVM_21)
+	}
 }
 
 tasks.jar {
@@ -63,9 +65,8 @@ tasks.jar {
 }
 
 java {
-	// Current LTS version of Java
-	sourceCompatibility = JavaVersion.VERSION_17
-	targetCompatibility = JavaVersion.VERSION_17
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
 }
 
 detekt {
