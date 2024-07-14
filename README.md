@@ -13,6 +13,7 @@ includes the following:
 * A reasonable `.gitignore` file, including one in the `.idea` folder that ignores files that you shouldn't commit -
   if you're using IDEA yourself, you should install the Ignore plugin to handle changes to this for you.
 * A Groovy-based Logback config, so you've reasonable logging out of the box.
+* Automatic generation of a Dockerfile via a `createDockerFile` task.
 
 **Note:** This template includes a `.editorconfig` file that defaults to using tabs for indentation in almost all file
 types. This is because tabs are more accessible for the blind, or those with impaired vision. We won't accept
