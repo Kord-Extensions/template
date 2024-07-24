@@ -1,41 +1,23 @@
 import dev.kordex.gradle.docker.file.*
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import dev.kordex.gradle.plugins.kordex.DataCollection
 
 plugins {
-	application
-
 	kotlin("jvm")
 	kotlin("plugin.serialization")
 
-	id("dev.kordex.gradle.docker")
-
 	id("com.github.johnrengelman.shadow")
 	id("io.gitlab.arturbosch.detekt")
+
+	id("dev.kordex.gradle.docker")
+	id("dev.kordex.gradle.kordex") version "1.0.1"
 }
 
 group = "template"
 version = "1.0-SNAPSHOT"
 
-repositories {
-	google()
-	mavenCentral()
-
-	maven {
-		name = "Sonatype Snapshots (Legacy)"
-		url = uri("https://oss.sonatype.org/content/repositories/snapshots")
-	}
-
-	maven {
-		name = "Sonatype Snapshots"
-		url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots")
-	}
-}
-
 dependencies {
 	detektPlugins(libs.detekt)
 
-	implementation(libs.kord.extensions)
 	implementation(libs.kotlin.stdlib)
 	implementation(libs.kx.ser)
 
@@ -47,29 +29,10 @@ dependencies {
 	implementation(libs.logging)
 }
 
-application {
-	mainClass.set("template.AppKt")
-}
+kordEx {
+	dataCollection(DataCollection.Standard)
 
-tasks.withType<KotlinCompile> {
-	compilerOptions {
-		freeCompilerArgs.add("-Xopt-in=kotlin.RequiresOptIn")
-
-		jvmTarget.set(JvmTarget.JVM_21)
-	}
-}
-
-tasks.jar {
-	manifest {
-		attributes(
-			"Main-Class" to "template.AppKt"
-		)
-	}
-}
-
-java {
-	sourceCompatibility = JavaVersion.VERSION_21
-	targetCompatibility = JavaVersion.VERSION_21
+	mainClass = "template.AppKt"
 }
 
 detekt {
