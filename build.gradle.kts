@@ -30,6 +30,7 @@ dependencies {
 }
 
 kordEx {
+	// https://kordex.dev/blog/2024-07-23/kordex-2#levels
 	dataCollection(DataCollection.Standard)
 
 	mainClass = "template.AppKt"
