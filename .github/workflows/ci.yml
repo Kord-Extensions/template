@@ -22,11 +22,11 @@ jobs:
           java-version: 17
           distribution: temurin
 
-      - name: Gradle (Build)
-        uses: gradle/gradle-build-action@v3
+      - name: Gradle (Setup)
+        uses: gradle/actions/setup-gradle@v3
 
-        with:
-          arguments: build
+      - name: Gradle (Build)
+        run: "./gradlew build"
 
       - name: Upload artifacts (Main JAR)
         uses: actions/upload-artifact@v4
