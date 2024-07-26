@@ -107,6 +107,7 @@ fabric.properties
 
 # Gradle build output folder
 build/
+.kotlin/
 
 # Env vars - don't commit this!
 .env

@@ -9,7 +9,7 @@ plugins {
 	id("io.gitlab.arturbosch.detekt")
 
 	id("dev.kordex.gradle.docker")
-	id("dev.kordex.gradle.kordex") version "1.0.2"
+	id("dev.kordex.gradle.kordex") version "1.0.3"
 }
 
 group = "template"
