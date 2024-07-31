@@ -9,7 +9,7 @@ plugins {
 	id("io.gitlab.arturbosch.detekt")
 
 	id("dev.kordex.gradle.docker")
-	id("dev.kordex.gradle.kordex") version "1.0.5"
+	id("dev.kordex.gradle.kordex")
 }
 
 group = "template"
@@ -30,10 +30,12 @@ dependencies {
 }
 
 kordEx {
-	// https://kordex.dev/blog/2024-07-23/kordex-2#levels
-	dataCollection(DataCollection.Standard)
+	bot {
+		// https://kordex.dev/blog/2024-07-23/kordex-2#levels
+		dataCollection(DataCollection.Standard)
 
-	mainClass = "template.AppKt"
+		mainClass = "template.AppKt"
+	}
 }
 
 detekt {
