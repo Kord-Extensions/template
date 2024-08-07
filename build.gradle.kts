@@ -31,7 +31,7 @@ dependencies {
 
 kordEx {
 	bot {
-		// https://kordex.dev/blog/2024-07-23/kordex-2#levels
+		// See https://docs.kordex.dev/data-collection.html
 		dataCollection(DataCollection.Standard)
 
 		mainClass = "template.AppKt"
