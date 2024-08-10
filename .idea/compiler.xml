@@ -5,6 +5,9 @@
       <module name="ext-common" target="1.8" />
       <module name="ext-common.main" target="1.8" />
       <module name="ext-common.test" target="1.8" />
+      <module name="template.buildSrc" target="17" />
+      <module name="template.buildSrc.main" target="17" />
+      <module name="template.buildSrc.test" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>
