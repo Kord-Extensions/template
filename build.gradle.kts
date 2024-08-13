@@ -67,6 +67,12 @@ docker {
 
 		emptyLine()
 
+		// Add volumes for locations that you need to persist. This is important!
+		volume("/bot/data")  // Storage for data files
+		volume("/bot/plugins")  // Plugin ZIP/JAR location
+
+		emptyLine()
+
 		workdir("/bot")
 
 		emptyLine()
