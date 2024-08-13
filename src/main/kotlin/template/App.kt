@@ -3,9 +3,9 @@
  */
 package template
 
-import com.kotlindiscord.kord.extensions.ExtensibleBot
-import com.kotlindiscord.kord.extensions.utils.env
 import dev.kord.common.entity.Snowflake
+import dev.kordex.core.ExtensibleBot
+import dev.kordex.core.utils.env
 import template.extensions.TestExtension
 
 val TEST_SERVER_ID = Snowflake(

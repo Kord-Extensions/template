@@ -1,15 +1,15 @@
 package template.extensions
 
-import com.kotlindiscord.kord.extensions.commands.Arguments
-import com.kotlindiscord.kord.extensions.commands.converters.impl.coalescingDefaultingString
-import com.kotlindiscord.kord.extensions.commands.converters.impl.defaultingString
-import com.kotlindiscord.kord.extensions.commands.converters.impl.user
-import com.kotlindiscord.kord.extensions.components.components
-import com.kotlindiscord.kord.extensions.components.publicButton
-import com.kotlindiscord.kord.extensions.extensions.Extension
-import com.kotlindiscord.kord.extensions.extensions.chatCommand
-import com.kotlindiscord.kord.extensions.extensions.publicSlashCommand
-import com.kotlindiscord.kord.extensions.utils.respond
+import dev.kordex.core.commands.Arguments
+import dev.kordex.core.commands.converters.impl.coalescingDefaultingString
+import dev.kordex.core.commands.converters.impl.defaultingString
+import dev.kordex.core.commands.converters.impl.user
+import dev.kordex.core.components.components
+import dev.kordex.core.components.publicButton
+import dev.kordex.core.extensions.Extension
+import dev.kordex.core.extensions.chatCommand
+import dev.kordex.core.extensions.publicSlashCommand
+import dev.kordex.core.utils.respond
 import template.TEST_SERVER_ID
 
 class TestExtension : Extension() {
