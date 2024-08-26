@@ -10,7 +10,7 @@ pluginManagement {
 		id("com.github.jakemarsden.git-hooks") version "0.0.2"
 		id("com.github.johnrengelman.shadow") version "8.1.1"
 
-		id("dev.kordex.gradle.docker") version "1.3.0"
+		id("dev.kordex.gradle.docker") version "1.4.2"
 		id("dev.kordex.gradle.kordex") version "1.3.0"
 	}
 }
