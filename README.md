@@ -28,6 +28,7 @@ feedback or PRs targeting this approach, though you can always change it in your
 - In the `build.gradle.kts`:
   - Set the `group` and `version` properties as appropriate.
   - In the `kordEx` and `tasks.jar` block, update the main class path/name as appropriate.
+  - In the `kordEx` block, update the KordEx version if needed.
 - In the `settings.gradle.kts`, update the name of the root project as appropriate.
 - The bundled Detekt config is pretty strict—you can check over `detekt.yml` if you want to change it, but you need to
   follow the to-dos in that file regardless.

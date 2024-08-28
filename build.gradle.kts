@@ -30,6 +30,8 @@ dependencies {
 }
 
 kordEx {
+	kordExVersion = "2.2.0-SNAPSHOT"
+
 	bot {
 		// See https://docs.kordex.dev/data-collection.html
 		dataCollection(DataCollection.Standard)
