@@ -30,7 +30,7 @@ dependencies {
 }
 
 kordEx {
-	kordExVersion = "2.2.0-SNAPSHOT"
+	kordExVersion = "2.2.1-SNAPSHOT"
 
 	bot {
 		// See https://docs.kordex.dev/data-collection.html
