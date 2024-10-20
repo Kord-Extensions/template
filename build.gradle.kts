@@ -30,13 +30,18 @@ dependencies {
 }
 
 kordEx {
-	kordExVersion = "2.2.1-SNAPSHOT"
+	kordExVersion = "2.3.0-SNAPSHOT"
 
 	bot {
 		// See https://docs.kordex.dev/data-collection.html
 		dataCollection(DataCollection.Standard)
 
 		mainClass = "template.AppKt"
+	}
+
+	i18n {
+		classPackage = "template.i18n"
+		translationBundle = "template.strings"
 	}
 }
 

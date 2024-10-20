@@ -13,6 +13,7 @@ includes the following:
 - A reasonable `.gitignore` file, including one in the `.idea` folder that ignores files that you shouldn't commit –
   if you're using IDEA yourself, you should install the Ignore plugin to handle changes to this for you.
 - A Groovy-based Logback config, so you have reasonable logging out of the box.
+- A default set of translations in `src/main/resources/translations`, and automatic generation of `Key` objects.
 - Automatic generation of a Dockerfile via a `createDockerFile` task, also run at build time.
 
 **Note:** This template includes a `.editorconfig` file that defaults to using tabs for indentation in almost all file
@@ -34,6 +35,7 @@ feedback or PRs targeting this approach, though you can always change it in your
   follow the to-dos in that file regardless.
 - The Logback configuration is in `src/main/resources/logback.groovy`. If the logging setup doesn't suit, you can change
   it there.
+- The default translation bundle in `src/main/resources/translations` will likely need to be renamed for your project.
 
 ## Bundled Bot
 
